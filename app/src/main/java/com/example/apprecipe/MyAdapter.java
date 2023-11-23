@@ -1,6 +1,7 @@
 package com.example.apprecipe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +35,20 @@ public class MyAdapter extends RecyclerView.Adapter<FoodViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int i) {
 
-        holder.imageView.setImageResource(myFoodList.get(i).getItemImage());
+        //holder.imageView.setImageResource(myFoodList.get(i).getItemImage());
         holder.mTitle.setText(myFoodList.get(i).getItemName());
         holder.mDescription.setText(myFoodList.get(i).getItemDescription());
         holder.mPrice.setText(myFoodList.get(i).getItemPrice());
+
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra("Image",myFoodList.get(holder.getAdapterPosition()).getItemImage());
+                intent.putExtra("Description",myFoodList.get(holder.getAdapterPosition()).getItemDescription());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -58,7 +69,6 @@ class FoodViewHolder extends RecyclerView.ViewHolder{
         mTitle = itemView.findViewById(R.id.tvTitle);
         mDescription = itemView.findViewById(R.id.tvDescription);
         mPrice = itemView.findViewById(R.id.tvPrice);
-
-        mCardView = itemView.findViewById(R.id.myCarView);
+        mCardView = itemView.findViewById(R.id.myCardView);
     }
 }
