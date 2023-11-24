@@ -73,7 +73,7 @@ public class Upload_Recipe extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete()) ;
+                while(!uriTask.isComplete()) ;
                 Uri urlImage = uriTask.getResult();
                 imageUrl = urlImage.toString();
                 uploadRecipe();
@@ -101,18 +101,14 @@ public class Upload_Recipe extends AppCompatActivity {
         String myCurrentDateTime = DateFormat.getDateTimeInstance()
                         .format(Calendar.getInstance().getTime());
 
-        FirebaseDatabase.getInstance().getReference("Recipe")
-                .child(myCurrentDateTime).setValue(foodData).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                        if(task.isSuccessful()) {
-                            Toast.makeText(Upload_Recipe.this, "Recipe Uploaded", Toast.LENGTH_SHORT).show();
-                            pd.dismiss();
-                            finish();
-                        }
-
-                    }
+        FirebaseDatabase.getInstance("https://apprecipe-53242-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Recipe")
+                .child(myCurrentDateTime).setValue(foodData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(Upload_Recipe.this, "Recipe Uploaded", Toast.LENGTH_SHORT).show();
+                pd.dismiss();
+                finish();
+            }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
