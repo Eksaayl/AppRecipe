@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity() {
     var foodDescription: TextView? = null
@@ -18,6 +19,10 @@ class DetailActivity : AppCompatActivity() {
         if (mBundle != null) {
             foodDescription!!.text = mBundle.getString("Description")
             foodImage!!.setImageResource(mBundle.getInt("Image"))
+
+            Glide.with(this)
+                .load(mBundle.getInt("Image"))
+                .into(foodImage!!);
         }
     }
 }

@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var imageView: ImageView
@@ -35,6 +36,10 @@ class MyAdapter(private val mContext: Context, private val myFoodList: List<Food
     }
 
     override fun onBindViewHolder(holder: FoodViewHolder, i: Int) {
+
+        Glide.with(mContext)
+            .load(myFoodList[i].itemImage)
+            .into(holder.imageView)
 
         //holder.imageView.setImageResource(myFoodList.get(i).getItemImage());
         holder.mTitle.text = myFoodList[i].itemName
