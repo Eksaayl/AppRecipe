@@ -75,11 +75,11 @@ class Upload_Recipe : AppCompatActivity() {
         FirebaseDatabase.getInstance("https://apprecipe-53242-default-rtdb.asia-southeast1.firebasedatabase.app")
             .getReference("Recipe")
             .child(myCurrentDateTime).setValue(foodData).addOnSuccessListener {
-                Toast.makeText(this@Upload_Recipe, "Recipe Uploaded", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Recipe Uploaded", Toast.LENGTH_SHORT).show()
                 pd.dismiss()
                 finish()
             }.addOnFailureListener { e ->
-                Toast.makeText(this@Upload_Recipe, e.message.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, e.message.toString(), Toast.LENGTH_SHORT).show()
                 pd.dismiss()
             }
     }
